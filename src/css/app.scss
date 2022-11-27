@@ -1,0 +1,58 @@
+// app global css in SCSS form
+@font-face {
+  font-family: knockout;
+  src: url(../assets/Knockout_HTF53-Heviweight_Regular.otf);
+}
+
+.text-knockout {
+  font-family: knockout;
+  text-transform: uppercase;
+}
+
+.colorize-white {
+  color: white;
+}
+
+.btn-cstm-w-100 {
+  width: 100px;
+}
+
+.btn-cstm-w-150 {
+  width: 150px;
+}
+
+.btn-cstm-w-200 {
+  width: 200px;
+}
+
+.btn-cstm-w-250 {
+  width: 250px;
+}
+
+.btn-cstm-w-300 {
+  width: 300px;
+}
+
+.btn-cstm-w-full {
+  width: 100%;
+}
+
+.btn-cstm-w-qtr {
+  width: 25%;
+}
+
+.btn-cstm-w-half {
+  width: 50%;
+}
+
+.btn-cstm-w-3rd {
+  width: 33%;
+}
+
+.btn-cstm-w-2-3rd {
+  width: 66%;
+}
+
+.btn-cstm-w-3-qtr {
+  width: 75%;
+}
