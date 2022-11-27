@@ -1,7 +1,9 @@
 <template>
   <q-item>
     <div class="card mb-4 shadow-lg border border-secondary bg-dark text-light">
-      <img class="card-img-top btn-cstm-w-full" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="Card image cap" />
+      <a :href="media_link + movie.id" target="_blank">
+      <img class="card-img-top btn-cstm-w-full" :src="'https://image.tmdb.org/t/p/w500/' + movie.poster_path" alt="Card image cap"  />
+      </a>
       <div class="card-body">
         <p class="card-text">{{ movie.title }}</p>
         <div class="">
@@ -23,15 +25,36 @@
 </template>
 <script>
 
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'MovieCard',
-  props: {
-    movie: {
-      type: Object,
-      required: true,
-    },
+  // props: {
+  //   movie: {
+  //     type: Object,
+  //     required: true,
+  //   },
+  // },
+  props: [
+    "movie",
+    "type"
+  ],  
+  setup() {
+    return {
+      media_link: 'https://www.themoviedb.org/movie/',
+    }
   },
+  methods: {
+    async set_link() {
+      if (this.type == "Series") {
+        this.media_link = "https://www.themoviedb.org/tv/"
+      }
+    }
+  },
+  created() {
+    console.log("selected type: ", this.type)
+    console.log("link: ", this.media_link)
+    this.set_link()
+  }
 })
 </script>

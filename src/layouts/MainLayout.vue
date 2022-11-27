@@ -12,7 +12,7 @@
         /> -->
 
         <q-toolbar-title>
-          Movie DB App
+          Random Movie App
         </q-toolbar-title>
 
         <!-- <div>Quasar v{{ $q.version }}</div> -->

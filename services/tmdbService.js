@@ -29,7 +29,7 @@ class RunService {
     let results = await axios.get(url, { params })
     console.log(results)
     let random_list = await this.random_list(body.type, results, url, params)
-    console.log("Random_List :", random_list)
+    // console.log("Random_List :", random_list)
     // return (results.data.results)
     return random_list
   }
@@ -124,7 +124,7 @@ class RunService {
     let i = 0
     let k = 20
     k < results.data.total_results ? null : k = results.data.total_results
-    console.log(k, item_list.length)
+    // console.log(k, item_list.length)
     // while (i < k) {
     while (id_list.length < k) {
       let rand_number = Math.floor(Math.random() * results.data.total_results);
@@ -134,13 +134,13 @@ class RunService {
         let page = Math.floor(rand_number / 20)
         page == 0 ? page = 1: null
         let page_item = rand_number % 20
-        console.log(`page: ${page}, item : ${page_item}`)
+        // console.log(`page: ${page}, item : ${page_item}`)
         params["page"] = page
         // console.log("params:", params)
         // console.log("get individual: ", axios.get(url + rand_number + `?api_key=${api_key}`))
         // console.log("get individual: ", axios.get(url + rand_number, { params }))
         let rand_results = await axios.get(url, { params })
-        console.log(`result : `, rand_results)
+        // console.log(`result : `, rand_results)
         if (!id_list.includes(rand_results.data.results[page_item].id)) {
           id_list.push(rand_results.data.results[page_item].id)
           random_list.push(rand_results.data.results[page_item])
@@ -148,8 +148,8 @@ class RunService {
       }      
     }
     
-    console.log(item_list)
-    console.log(id_list.length)
+    // console.log(item_list)
+    // console.log(id_list.length)
     return random_list
       // } else {
       //   k += 1

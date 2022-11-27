@@ -3,7 +3,7 @@
     <div id="app" class="row justify-center text-center">
       <div class="col-12 text-center">
         <h2 class="text-center mt-5">{{ page_name }}</h2>
-        <p>Keep up with the hottest movies that are trending this week.</p>
+        <p>Enter search criteria below to generate a random list of matching movies</p>
       </div>
     </div>
     <div class="row justify-center">
@@ -22,14 +22,25 @@
 
           <!-- </q-form> -->
         </div>
-        <q-btn class="q-my-sm btn-cstm-w-3rd" size="md" color="primary" @click="get_random()">
+        <q-btn class="q-ma-sm btn-cstm-w-3rd" size="md" color="primary" @click="get_random()">
+          <span v-if="!processing_search">
+            <q-icon name="search" class="q-mr-sm" size="1rem" />
+          </span>
+          <span v-if="processing_search">
+            <q-spinner class="q-mr-sm" color="secondary" size="1em" />
+          </span>
           List Random {{ type }}
-        </q-btn><br />
+        </q-btn>
+        <q-btn class="q-ma-sm btn-cstm-w-3rd" size="md" color="negative" @click="clear_state()">
+          <q-icon name="autorenew" class="q-mr-sm" size="1rem" />
+          Reset Selections
+        </q-btn>
+        <br />
       </div>
     </div>
     <div class="row">
       <div class="col-md-3" v-for="(movie, i) in movies" :key="i">
-        <movie-card :movie="movie" />
+        <movie-card :movie="movie" :type="type" />
       </div>
     </div>
   </q-page>
@@ -71,6 +82,7 @@ export default defineComponent({
       rating: ref(),
       sort_options: ref([]),
       sort: ref(),
+      processing_search: ref(false),
     };
   },
   methods: {
@@ -92,7 +104,14 @@ export default defineComponent({
       })
     },  
     async get_random() {
+      this.processing_search = true;
       this.save_state();
+      Notify.create({
+        message: `Processing...`,
+        color: "green",
+        position: "top",
+        timeout: 500
+      });
       // this.getTrendingMovies("day");
       // let options = await this.convert_options()
       if (this.year_end < this.year_start) {
@@ -115,7 +134,8 @@ export default defineComponent({
       console.log("genres: ", selections["genres"].toString())
       let movies = await TMDBService.fetch_random(selections)
       console.log(movies)
-      this.movies = movies
+      this.movies = movies;
+      this.processing_search = false;
     },
 
     async convert_options() {
@@ -190,8 +210,34 @@ export default defineComponent({
         this.country = selections.country
         this.sort = selections.sort_by
         this.genres = selections.genres
+      } else {
+        this.year_start = "2020"
+        this.year_end = new Date().getFullYear()
+        this.rating = "3"
+        this.type = "Movie"
+        this.country = "USA"
+        this.sort = "Popularity Descending"
+        this.genres = []
       }
     },
+    async clear_state() {
+      Notify.create({
+        message: `Selections Reset`,
+        color: "green",
+        position: "top",
+      });
+      if (localStorage.getItem("selections")) {
+        localStorage.removeItem("selections");
+      }
+        // console.log("selections: ", selections)
+      this.year_start = "2020"
+      this.year_end = new Date().getFullYear()
+      this.rating = "3"
+      this.type = "Movie"
+      this.country = "USA"
+      this.sort = "Popularity Descending"
+      this.genres = []
+    }
   },
   mounted() {
     // this.getTrendingMovies("day");
