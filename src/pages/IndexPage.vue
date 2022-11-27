@@ -36,6 +36,15 @@
           Reset Selections
         </q-btn>
         <br />
+        <q-btn 
+          v-back-to-top.animate="{offset: 200, duration: 200}" 
+          round color="primary" 
+          class="fixed-bottom-right animate-pop" 
+          style="margin: 0 15px 15px 0; z-index: 500" 
+          @click="scroll_top"
+        >
+          <q-icon name="keyboard_arrow_up" />
+        </q-btn>
       </div>
     </div>
     <div class="row">
@@ -86,6 +95,9 @@ export default defineComponent({
     };
   },
   methods: {
+    scroll_top() {
+      window.scrollTo(0, 0);
+    },
     getTrendingMovies(category) {
       return fetch(
         `https://api.themoviedb.org/3/trending/movie/${category}?api_key=${this.apiKey}`

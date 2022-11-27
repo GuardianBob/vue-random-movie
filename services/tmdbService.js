@@ -70,6 +70,7 @@ class RunService {
     if (params.end_year) new_params["primary_release_date.lte"] = params.end_year + "-12-31"
     if (params.rating) new_params["vote_average.gte"] = params.rating
     new_params["vote_count.gte"] = 10
+    // new_params["include_adult"] = "true"
     if (params.country) new_params["with_original_language"] = option_list.country[params.country]
     if (params.sort_by) new_params["sort_by"] = option_list.sortBy[params.sort_by]   
 
@@ -94,6 +95,7 @@ class RunService {
     if (params.end_year) new_params["first_air_date.lte"] = params.end_year + "-12-31"
     if (params.rating) new_params["vote_average.gte"] = params.rating
     // new_params["vote_count.gte"] = 10
+    // new_params["include_adult"] = "true"
     if (params.country) new_params["with_original_language"] = option_list.country[params.country]
     if (params.sort_by) new_params["sort_by"] = option_list.sortBy[params.sort_by]   
 
