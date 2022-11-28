@@ -41,19 +41,22 @@ export default defineComponent({
   ],  
   setup() {
     return {
-      media_link: 'https://www.themoviedb.org/movie/',
+      media_link: ref(''),
     }
   },
   methods: {
     async set_link() {
+      console.log(this.type)
       if (this.type == "Series") {
         this.media_link = "https://www.themoviedb.org/tv/"
+      } else {
+        this.media_link = "https://www.themoviedb.org/movie/"
       }
     }
   },
-  created() {
-    console.log("selected type: ", this.type)
-    console.log("link: ", this.media_link)
+  updated() {
+    // console.log("selected type: ", this.type)
+    // console.log("link: ", this.media_link)
     this.set_link()
   }
 })

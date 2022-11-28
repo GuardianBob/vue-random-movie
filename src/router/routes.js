@@ -4,7 +4,8 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('src/pages/IndexPage.vue') }
+      { path: '', component: () => import('src/pages/IndexPage.vue') },
+      { path: '/trending', component: () => import('src/pages/GetTrending.vue') }
     ]
   },
 

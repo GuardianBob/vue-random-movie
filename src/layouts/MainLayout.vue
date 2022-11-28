@@ -2,14 +2,14 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <!-- <q-btn
+        <q-btn
           flat
           dense
           round
           icon="menu"
           aria-label="Menu"
           @click="toggleLeftDrawer"
-        /> -->
+        />
 
         <q-toolbar-title>
           Random Movie App
@@ -19,7 +19,7 @@
       </q-toolbar>
     </q-header>
 
-    <!-- <q-drawer
+    <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
       bordered
@@ -37,7 +37,7 @@
           v-bind="link"
         />
       </q-list>
-    </q-drawer> -->
+    </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -47,52 +47,52 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-// import EssentialLink from 'components/EssentialLink.vue'
+import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
-  {
-    title: 'Movies',
-    // caption: 'Trending',
-    icon: 'mdi-movie-open-outline',
-    link: '/movies'
-  },
-  {
-    title: 'TV',
-    // caption: 'forum.quasar.dev',
-    icon: 'live_tv',
-    link: '/tv'
-  },
   {
     title: 'Random',
     // caption: 'github.com/quasarframework',
     icon: 'shuffle',
-    link: '/shuffle'
+    link: '/'
   },
   {
-    title: 'Movie Database',
-    // caption: 'chat.quasar.dev',
-    icon: 'mdi-movie-open-plus',
-    link: 'movie_db'
+    title: 'Trending',
+    // caption: 'Trending',
+    icon: 'movie',
+    link: '/trending'
   },
-  {
-    title: 'TV Database',
-    // caption: '@quasarframework',
-    icon: 'queue_play_next',
-    link: 'tv_db'
-  },
-  {
-    title: 'Movie List',
-    // caption: 'chat.quasar.dev',
-    icon: 'mdi-movie-open-plus',
-    link: 'movie_list'
-  },
+  // {
+  //   title: 'TV',
+  //   // caption: 'forum.quasar.dev',
+  //   icon: 'live_tv',
+  //   link: '/tv'
+  // },
+  // {
+  //   title: 'Movie Database',
+  //   // caption: 'chat.quasar.dev',
+  //   icon: 'mdi-movie-open-plus',
+  //   link: 'movie_db'
+  // },
+  // {
+  //   title: 'TV Database',
+  //   // caption: '@quasarframework',
+  //   icon: 'queue_play_next',
+  //   link: 'tv_db'
+  // },
+  // {
+  //   title: 'Movie List',
+  //   // caption: 'chat.quasar.dev',
+  //   icon: 'mdi-movie-open-plus',
+  //   link: 'movie_list'
+  // },
 ]
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    // EssentialLink
+    EssentialLink
   },
 
   setup () {

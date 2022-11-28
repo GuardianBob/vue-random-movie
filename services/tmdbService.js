@@ -52,6 +52,18 @@ class RunService {
     });
   }
 
+  async fetch_trending(category, page = 1, media = "movie") {
+    let url = `https://api.themoviedb.org/3/trending/${media}/${category}`
+    let params = {
+      "api_key": process.env.TMDB_API,
+      "page": page
+    }
+    console.log(params)
+    let results = await axios.get(url, { params })
+    console.log(results)
+    return results
+  }
+
   async get_movie_params(params) {
     // console.log(params)
     let new_params = {}
