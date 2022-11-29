@@ -37,27 +37,30 @@ export default defineComponent({
   // },
   props: [
     "movie",
-    "type"
+    "media_link"
   ],  
   setup() {
     return {
-      media_link: ref(''),
+      // media_link: ref(''),
     }
   },
   methods: {
-    async set_link() {
-      console.log(this.type)
-      if (this.type == "Series") {
-        this.media_link = "https://www.themoviedb.org/tv/"
-      } else {
-        this.media_link = "https://www.themoviedb.org/movie/"
-      }
-    }
+    // async set_link() {
+    //   console.log(this.type)
+    //   if (this.type == "Series") {
+    //     this.media_link = "https://www.themoviedb.org/tv/"
+    //   } else {
+    //     this.media_link = "https://www.themoviedb.org/movie/"
+    //   }
+    // }
   },
   updated() {
     // console.log("selected type: ", this.type)
     // console.log("link: ", this.media_link)
-    this.set_link()
+    // this.set_link()
+  },
+  mounted() {
+    // this.set_link()
   }
 })
 </script>

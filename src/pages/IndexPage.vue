@@ -49,7 +49,7 @@
     </div>
     <div class="row">
       <div class="col-md-3" v-for="(movie, i) in movies" :key="i">
-        <movie-card :movie="movie" :type="type" />
+        <movie-card :movie="movie" :media_link="media_link" />
       </div>
     </div>
   </q-page>
@@ -92,6 +92,7 @@ export default defineComponent({
       sort_options: ref([]),
       sort: ref(),
       processing_search: ref(false),
+      medial_link: ref('')
     };
   },
   methods: {
@@ -105,19 +106,30 @@ export default defineComponent({
         .then((response) => response.json())
         .then((data) => {
           this.movies = data.results;
-          console.log(this.movies);
+          // console.log(this.movies);
         });
     },
     test_connect() {
       // test_add(test_data);
       APIService.test_connect()
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
       })
     },  
+
+    async set_link() {
+      // console.log(this.type)
+      if (this.type == "Series") {
+        this.media_link = "https://www.themoviedb.org/tv/"
+      } else {
+        this.media_link = "https://www.themoviedb.org/movie/"
+      }
+    }, 
+
     async get_random() {
       this.processing_search = true;
       this.save_state();
+      this.set_link();
       Notify.create({
         message: `Processing...`,
         color: "green",
@@ -143,9 +155,9 @@ export default defineComponent({
         "sort_by": this.sort,
         "genres": this.genres,
       }
-      console.log("genres: ", selections["genres"].toString())
+      // console.log("genres: ", selections["genres"].toString())
       let movies = await TMDBService.fetch_random(selections)
-      console.log(movies)
+      // console.log(movies)
       this.movies = movies;
       this.processing_search = false;
     },

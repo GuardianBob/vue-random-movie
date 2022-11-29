@@ -44,7 +44,7 @@
     </div>
     <div class="row">
       <div class="col-md-3" v-for="(movie, i) in movies" :key="i">
-        <movie-card :movie="movie" :type="type" />
+        <movie-card :movie="movie" :media_link="media_link" />
       </div>
     </div>
     <div class="q-pa-lg flex flex-center" v-if="movies.length > 0">
@@ -93,7 +93,8 @@ export default defineComponent({
       sort: ref(),
       processing_search: ref(false),
       current: ref(1),
-      pages: ref()
+      pages: ref(),
+      media_link: ref('')
     };
   },
   methods: {
@@ -101,6 +102,7 @@ export default defineComponent({
       window.scrollTo(0, 0);
     },
     async getTrendingMovies(category) {
+      this.set_link();
       // return fetch(
       //   `https://api.themoviedb.org/3/trending/movie/${category}?api_key=${this.apiKey}`
       // )
@@ -108,7 +110,7 @@ export default defineComponent({
       if (media == "series" ) media = "tv"
       this.current = 1
       let movies = await TMDBService.fetch_trending(category, 1, media)
-      console.log(movies)
+      // console.log(movies)
       this.movies = movies.data.results
       this.pages = movies.data.total_pages
         // .then((response) => response.json())
@@ -119,18 +121,28 @@ export default defineComponent({
     },
 
     async set_page(page) {
-      console.log(this.category, page)
+      // console.log(this.category, page)
       let media = this.type.toLowerCase();
       if (media == "series" ) media = "tv"
       let movies = await TMDBService.fetch_trending(this.category, page, media)
-      console.log(movies)
+      // console.log(movies)
       this.movies = movies.data.results
       this.pages = movies.data.total_pages
     },
-    
+
+    async set_link() {
+      // console.log(this.type)
+      if (this.type == "Series") {
+        this.media_link = "https://www.themoviedb.org/tv/"
+      } else {
+        this.media_link = "https://www.themoviedb.org/movie/"
+      }
+    }, 
+
     async get_new() {
       this.processing_search = true;
       this.save_state();
+      this.set_link();
       Notify.create({
         message: `Processing...`,
         color: "green",
@@ -156,9 +168,9 @@ export default defineComponent({
         "sort_by": this.sort,
         "genres": this.genres,
       }
-      console.log("genres: ", selections["genres"].toString())
+      // console.log("genres: ", selections["genres"].toString())
       let movies = await TMDBService.fetch_random(selections)
-      console.log(movies)
+      // console.log(movies)
       this.movies = movies;
       this.processing_search = false;
     },

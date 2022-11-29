@@ -6,7 +6,7 @@ import option_list from "../src/assets/options";
 class RunService {
 
   async fetch_random(body) {
-    console.log('Hit RunService: ', body)
+    // console.log('Hit RunService: ', body)
     let url = ""
     let params
     switch (body.type) {
@@ -27,7 +27,7 @@ class RunService {
     // const params = await this.get_movie_params(body)
     
     let results = await axios.get(url, { params })
-    console.log(results)
+    // console.log(results)
     let random_list = await this.random_list(body.type, results, url, params)
     // console.log("Random_List :", random_list)
     // return (results.data.results)
@@ -36,16 +36,16 @@ class RunService {
 
   // WORKS!!
   fetch_random_webstring(body) {
-    console.log('Hit RunService: ', body)
+    // console.log('Hit RunService: ', body)
     var config = {
       method: 'get',
-      url: 'https://api.themoviedb.org/3/discover/movie?with_genres=28&primary_release_date_gte=2001&release_date_lte=2001&api_key=1185412e00a20896217f777462cbdaff',
+      url: `https://api.themoviedb.org/3/discover/movie?with_genres=28&primary_release_date_gte=2001&release_date_lte=2001&api_key=${process.env.TMDB_API}`,
       headers: { }
     };
 
     axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
+      // console.log(JSON.stringify(response.data));
     })
     .catch(function (error) {
       console.log(error);
@@ -58,9 +58,9 @@ class RunService {
       "api_key": process.env.TMDB_API,
       "page": page
     }
-    console.log(params)
+    // console.log(params)
     let results = await axios.get(url, { params })
-    console.log(results)
+    // console.log(results)
     return results
   }
 

@@ -105,7 +105,7 @@ export default defineComponent({
         .then((response) => response.json())
         .then((data) => {
           this.movies = data.results;
-          console.log(this.movies);
+          // console.log(this.movies);
         });
     },
     
@@ -137,9 +137,9 @@ export default defineComponent({
         "sort_by": this.sort,
         "genres": this.genres,
       }
-      console.log("genres: ", selections["genres"].toString())
+      // console.log("genres: ", selections["genres"].toString())
       let movies = await TMDBService.fetch_random(selections)
-      console.log(movies)
+      // console.log(movies)
       this.movies = movies;
       this.processing_search = false;
     },

@@ -57,7 +57,7 @@ export default defineComponent({
         .then((response) => response.json())
         .then((data) => {
           this.movies = data.results;
-          console.log(this.movies);
+          // console.log(this.movies);
         });
     },
     test_movie() {
@@ -65,21 +65,21 @@ export default defineComponent({
       // test_add(test_data);
       APIService.test_add(test_data)
         .then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
         })
     }, 
     test_connect() {
       // test_add(test_data);
       APIService.test_connect()
         .then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
         })
     }, 
     list_all() {
       // test_add(test_data);
       APIService.list_all()
         .then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
         })
     }, 
   },
