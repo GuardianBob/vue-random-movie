@@ -62,7 +62,7 @@ import TMDBService from '../../services/tmdbService'
 import { useQuasar, Notify } from "quasar";
 import mOptions from "../assets/options"
 export default defineComponent({
-  name: "RandomMovie",
+  name: "TrendingMovie",
   components: {
     MovieCard,
     Notify
@@ -72,7 +72,7 @@ export default defineComponent({
     const $q = useQuasar();
     $q.dark.set(true);
     return {
-      page_name: "Random",
+      page_name: "Trending",
       movies: [],
       apiKey: process.env.TMDB_API,
       title: ref(""),

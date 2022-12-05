@@ -9,12 +9,12 @@
         <div class="">
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">
+              <!-- <button type="button" class="btn btn-sm btn-outline-secondary">
                 <i class="fas fa-heart"></i>
               </button>
               <button type="button" class="btn btn-sm btn-outline-secondary">
                 <i class="fas fa-plus"></i>
-              </button>
+              </button> -->
             </div>
             <small class="ms-auto text-muted">Rating {{ movie.vote_average }}/10</small>
           </div>
