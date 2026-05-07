@@ -5,6 +5,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('src/pages/IndexPage.vue') },
+      { path: '/plex', component: () => import('src/pages/PlexRandom.vue') },
       { path: '/trending', component: () => import('src/pages/GetTrending.vue') }
     ]
   },

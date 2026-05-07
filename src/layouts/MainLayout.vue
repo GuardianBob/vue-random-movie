@@ -57,6 +57,12 @@ const linksList = [
     link: '/'
   },
   {
+    title: 'Plex Library',
+    // caption: 'Plex Media Server',
+    icon: 'dns',
+    link: '/plex'
+  },
+  {
     title: 'Trending',
     // caption: 'Trending',
     icon: 'movie',

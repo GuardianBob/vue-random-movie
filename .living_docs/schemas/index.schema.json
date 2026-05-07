@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/GuardianBob/living-docs/schemas/index.schema.json",
+  "title": "INDEX.md Frontmatter",
+  "description": "Validation schema for the generated .living_docs/INDEX.md frontmatter. The rebuild script refuses to write an INDEX whose frontmatter fails this schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generator",
+    "updated",
+    "next_task_id",
+    "active_task",
+    "last_completed_task",
+    "recent_tasks",
+    "open_followups",
+    "counts"
+  ],
+  "properties": {
+    "schema_version": { "type": "integer", "const": 1 },
+    "generator": {
+      "type": "string",
+      "description": "Plugin identifier and semver, e.g. @GuardianBob/living-docs@0.1.0. Pattern is case-insensitive on the scope/name to accommodate the @GuardianBob mixed-case scope.",
+      "pattern": "^@[A-Za-z0-9-]+/[A-Za-z0-9-]+@\\d+\\.\\d+\\.\\d+$"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp produced by new Date().toISOString()."
+    },
+    "next_task_id": {
+      "type": "string",
+      "pattern": "^T-\\d{3,}$"
+    },
+    "active_task": {
+      "oneOf": [
+        { "type": "string", "pattern": "^T-\\d{3,}$" },
+        { "type": "null" }
+      ]
+    },
+    "last_completed_task": {
+      "oneOf": [
+        { "type": "string", "pattern": "^T-\\d{3,}$" },
+        { "type": "null" }
+      ]
+    },
+    "recent_tasks": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["task_id", "type", "slug", "date", "file"],
+        "properties": {
+          "task_id": {
+            "oneOf": [
+              { "type": "string", "pattern": "^T-\\d{3,}$" },
+              { "type": "null" }
+            ]
+          },
+          "type": { "type": "string", "minLength": 1 },
+          "slug": {
+            "oneOf": [
+              { "type": "string", "minLength": 1 },
+              { "type": "null" }
+            ]
+          },
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}(T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2}))?$"
+          },
+          "file": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "open_followups": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "oneOf": [
+          { "type": "string", "minLength": 1 },
+          {
+            "type": "object",
+            "required": ["note"],
+            "properties": {
+              "note": { "type": "string", "minLength": 1 },
+              "task_id": { "type": "string", "pattern": "^T-\\d{3,}$" }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    },
+    "latest_memory": {
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "null" }
+      ]
+    },
+    "latest_commit": {
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "null" }
+      ]
+    },
+    "latest_chapter": {
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "null" }
+      ]
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["memory", "git_commit", "adventure", "archived"],
+      "properties": {
+        "memory":     { "type": "integer", "minimum": 0 },
+        "git_commit": { "type": "integer", "minimum": 0 },
+        "adventure":  { "type": "integer", "minimum": 0 },
+        "archived":   { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}
